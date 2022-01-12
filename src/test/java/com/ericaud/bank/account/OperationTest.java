@@ -26,4 +26,18 @@ public class OperationTest {
         });
     }
 
+    @Test
+    public void givenNotPositiveAmount_whenCreatingAnOperation_thenThrowAnInvalidWithdrawalOperationAmountException() {
+        // withdrawal operation
+        assertThrows(InvalidOperationException.class, () -> {
+            new Operation(OperationType.WITHDRAWAL, new BigDecimal(0));
+        });
+        assertThrows(InvalidOperationException.class, () -> {
+            new Operation(OperationType.WITHDRAWAL, new BigDecimal(-1));
+        });
+        assertThrows(InvalidOperationException.class, () -> {
+            new Operation(OperationType.WITHDRAWAL, null);
+        });
+    }
+
 }
