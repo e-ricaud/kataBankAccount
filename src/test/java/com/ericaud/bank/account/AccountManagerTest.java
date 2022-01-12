@@ -45,4 +45,29 @@ public class AccountManagerTest {
 
         assertEquals(0., accountManager.getAccount().getBalance().doubleValue());
     }
+
+    @Test
+    public void givenValidAmount_whenExecutingAnOperation_thenBalanceIsDebitedWithAmount() {
+        try {
+            accountManager.doWithdraw(100.);
+        } catch(Exception e) {
+            fail(e.getMessage());
+        }
+
+        assertEquals(-100., accountManager.getAccount().getBalance().doubleValue());
+    }
+
+    @Test
+    public void givenNotPositiveOrNullAmount_whenWithdrawal_thenThrowInvalidOperationAmountException() {
+        assertThrows(InvalidOperationException.class, () -> {
+            accountManager.doWithdraw(-100.);
+        });
+        assertThrows(InvalidOperationException.class, () -> {
+            accountManager.doWithdraw(0.);
+        });
+
+        assertEquals(0., accountManager.getAccount().getBalance().doubleValue());
+    }
+
+
 }

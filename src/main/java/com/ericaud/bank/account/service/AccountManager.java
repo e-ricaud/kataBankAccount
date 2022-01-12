@@ -19,10 +19,16 @@ public class AccountManager {
         doOperation(amount,OperationType.DEPOSIT);
     }
 
+    public void doWithdraw(double amount) throws InvalidOperationException {
+        doOperation(amount,OperationType.WITHDRAWAL);
+    }
+
     private synchronized void doOperation(double amount, OperationType operationType) throws InvalidOperationException {
         Operation operation = new Operation(operationType, BigDecimal.valueOf(amount));
         if (operationType.equals(OperationType.DEPOSIT)) {
             this.account.setBalance(this.account.getBalance().add(BigDecimal.valueOf(amount)));
+        } else if (operationType.equals(OperationType.WITHDRAWAL)) {
+            this.account.setBalance(this.account.getBalance().subtract(BigDecimal.valueOf(amount)));
         }
     }
 
