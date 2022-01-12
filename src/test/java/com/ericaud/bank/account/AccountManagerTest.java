@@ -2,6 +2,7 @@ package com.ericaud.bank.account;
 
 import com.ericaud.bank.account.exception.InvalidOperationException;
 import com.ericaud.bank.account.model.Account;
+import com.ericaud.bank.account.model.OperationType;
 import com.ericaud.bank.account.service.AccountManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,6 +68,22 @@ public class AccountManagerTest {
         });
 
         assertEquals(0., accountManager.getAccount().getBalance().doubleValue());
+    }
+
+    @Test
+    public void givenValidAmount_whenExecutingAnOperation_thenNewOperationIsAddedToAccount() {
+        try {
+            accountManager.doDeposit(100.);
+            accountManager.doWithdraw(10.);
+            accountManager.doWithdraw(10.);
+        } catch(Exception e) {
+            fail(e.getMessage());
+        }
+
+        assertEquals(100., accountManager.getAccount().getOperations().get(0).getOperationAmount().doubleValue());
+        assertEquals(10., accountManager.getAccount().getOperations().get(1).getOperationAmount().doubleValue());
+        assertEquals(OperationType.WITHDRAWAL, accountManager.getAccount().getOperations().get(1).getOperationType());
+
     }
 
 

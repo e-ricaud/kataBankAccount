@@ -30,6 +30,7 @@ public class AccountManager {
         } else if (operationType.equals(OperationType.WITHDRAWAL)) {
             this.account.setBalance(this.account.getBalance().subtract(BigDecimal.valueOf(amount)));
         }
+        this.account.addOperation(operation);
     }
 
     public Account getAccount() {
