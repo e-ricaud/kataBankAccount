@@ -9,6 +9,7 @@ public class Operation {
 
     private OperationType operationType;
     private BigDecimal operationAmount;
+    private Date dateOperation;
 
     public Operation(OperationType operationType, BigDecimal operationAmount) throws InvalidOperationException {
         if (operationAmount == null || operationAmount.signum() < 1) {
@@ -16,6 +17,7 @@ public class Operation {
         }
         this.operationType= operationType;
         this.operationAmount= operationAmount;
+        this.dateOperation = new Date();
     }
 
     public OperationType getOperationType() {
@@ -24,6 +26,10 @@ public class Operation {
 
     public BigDecimal getOperationAmount() {
         return operationAmount;
+    }
+
+    public Date getDateOperation() {
+        return dateOperation;
     }
 
 
