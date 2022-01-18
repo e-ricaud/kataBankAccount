@@ -13,28 +13,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class OperationTest {
 
     @Test
-    public void givenNotPositiveAmount_whenCreatingAnOperation_thenThrowAnInvalidDepositOperationAmountException() {
+    public void givenNullAmount_whenCreatingAnOperation_thenThrowAnInvalidDepositOperationAmountException() {
         // deposit operation
-        assertThrows(InvalidOperationException.class, () -> {
-            new Operation(OperationType.DEPOSIT, new BigDecimal(0));
-        });
-        assertThrows(InvalidOperationException.class, () -> {
-            new Operation(OperationType.DEPOSIT, new BigDecimal(-1));
-        });
         assertThrows(InvalidOperationException.class, () -> {
             new Operation(OperationType.DEPOSIT, null);
         });
     }
 
     @Test
-    public void givenNotPositiveAmount_whenCreatingAnOperation_thenThrowAnInvalidWithdrawalOperationAmountException() {
+    public void givenNullAmount_whenCreatingAnOperation_thenThrowAnInvalidWithdrawalOperationAmountException() {
         // withdrawal operation
-        assertThrows(InvalidOperationException.class, () -> {
-            new Operation(OperationType.WITHDRAWAL, new BigDecimal(0));
-        });
-        assertThrows(InvalidOperationException.class, () -> {
-            new Operation(OperationType.WITHDRAWAL, new BigDecimal(-1));
-        });
         assertThrows(InvalidOperationException.class, () -> {
             new Operation(OperationType.WITHDRAWAL, null);
         });

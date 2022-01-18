@@ -30,18 +30,10 @@ public class OperationButton extends AbstractAction {
 
         switch (this.operationType) {
             case WITHDRAWAL:
-                try {
-                    this.fenetre.getAccountManager().doWithdraw(nombre1);
-                } catch (InvalidOperationException ex) {
-                    ex.printStackTrace();
-                }
+                this.fenetre.getAccountManager().doWithdraw(nombre1);
                 break;
             case DEPOSIT:
-                try {
-                    this.fenetre.getAccountManager().doDeposit(nombre1);
-                } catch (InvalidOperationException ex) {
-                    ex.printStackTrace();
-                }
+                this.fenetre.getAccountManager().doDeposit(nombre1);
                 break;
         }
 

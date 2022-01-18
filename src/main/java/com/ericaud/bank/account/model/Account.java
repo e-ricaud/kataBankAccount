@@ -2,12 +2,13 @@ package com.ericaud.bank.account.model;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Account {
 
     private BigDecimal balance;
-    private List<Operation> operations;
+    private final List<Operation> operations;
 
     public Account() {
         this.balance = BigDecimal.ZERO;
@@ -23,7 +24,7 @@ public class Account {
     }
 
     public List<Operation> getOperations() {
-        return operations;
+        return Collections.unmodifiableList(operations);
     }
 
     public void addOperation(Operation operation) {

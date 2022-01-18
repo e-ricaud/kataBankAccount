@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 public class AccountManager {
 
-    private Account account;
+    private final Account account;
 
     public AccountManager(Account account) {
         this.account = account;

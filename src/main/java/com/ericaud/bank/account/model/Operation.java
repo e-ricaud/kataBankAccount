@@ -3,13 +3,15 @@ package com.ericaud.bank.account.model;
 import com.ericaud.bank.account.exception.InvalidOperationException;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-public class Operation {
+public final class Operation {
 
-    private OperationType operationType;
-    private BigDecimal operationAmount;
-    private Date dateOperation;
+    private final OperationType operationType;
+    private final BigDecimal operationAmount;
+    private final LocalDateTime dateOperation;
 
     public Operation(OperationType operationType, BigDecimal operationAmount) throws InvalidOperationException {
         if (operationAmount == null || operationAmount.signum() < 1) {
@@ -17,7 +19,7 @@ public class Operation {
         }
         this.operationType= operationType;
         this.operationAmount= operationAmount;
-        this.dateOperation = new Date();
+        this.dateOperation = LocalDateTime.now();
     }
 
     public OperationType getOperationType() {
@@ -28,10 +30,7 @@ public class Operation {
         return operationAmount;
     }
 
-    public Date getDateOperation() {
+    public LocalDateTime getDateOperation() {
         return dateOperation;
     }
-
-
-
 }

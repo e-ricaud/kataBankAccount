@@ -3,6 +3,7 @@ package com.ericaud.bank.account.lab.ui.panel;
 import com.ericaud.bank.account.lab.ui.button.OperationButton;
 import com.ericaud.bank.account.service.AccountManager;
 import com.ericaud.bank.account.service.AccountPrinter;
+import com.ericaud.bank.account.service.AccountPrinterString;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,7 +66,9 @@ public class DabUi extends JFrame {
         panel.setLayout(new FlowLayout());
         panel.setBackground(Color.white);
 
-        JTextArea label = new JTextArea(AccountPrinter.printOperationsStr(getAccountManager().getAccount()));
+        AccountPrinter printer = new AccountPrinterString(getAccountManager().getAccount());
+
+        JTextArea label = new JTextArea(printer.printOperations());
 
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
