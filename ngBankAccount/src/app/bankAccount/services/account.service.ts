@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Account } from '../model/account';
 
@@ -13,7 +13,8 @@ export class AccountService {
   }
 
   public findById(id: number): Observable<Account> {
-    return this.http.get<Account>(this.usersUrl+`/${id}`);
+    let params = new HttpParams().set('id',id);
+    return this.http.get<Account>(`${this.usersUrl}`, { params });
   }
 
   // public save(user: User) {

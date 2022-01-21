@@ -1,4 +1,4 @@
-enum OperationType {
+export enum OperationType {
   DEPOSIT,
   WITHDRAWAL
 }

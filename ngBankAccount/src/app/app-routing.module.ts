@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserFormComponent } from './user/user-form/user-form.component';
-import { UserListComponent } from './user/user-list/user-list.component';
 
 
 const routes: Routes = [
-  { path: 'users', component: UserListComponent },
-  { path: 'adduser', component: UserFormComponent }
+  { path: 'accounts',
+    loadChildren: () => import('./bankAccount/bankaccount.module').then(m => m.BankaccountModule)
+  // component: AccountComponent
+  }
+  // { path: 'addaccount', component:  }
 ];
 
 @NgModule({

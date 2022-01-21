@@ -1,3 +1,5 @@
+import { OperationType } from "./operationType";
+
 export class Operation {
 
   id: number;
