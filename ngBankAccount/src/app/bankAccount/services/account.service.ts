@@ -14,6 +14,10 @@ export class AccountService {
     this.usersUrl = 'http://localhost:8080/account';
   }
 
+  public findAllAccount(): Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.usersUrl}/all`);
+  }
+
   public findById(id: number): Observable<Account> {
     let params = new HttpParams().set('id',id);
     return this.http.get<Account>(`${this.usersUrl}`, { params });

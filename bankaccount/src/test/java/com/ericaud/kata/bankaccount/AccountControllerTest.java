@@ -1,7 +1,7 @@
 package com.ericaud.kata.bankaccount;
 
+import com.ericaud.kata.bankaccount.controller.model.OperationForm;
 import com.ericaud.kata.bankaccount.entity.Account;
-import com.ericaud.kata.bankaccount.exception.InvalidOperationException;
 import com.ericaud.kata.bankaccount.persistance.AccountRepository;
 import com.ericaud.kata.bankaccount.services.AccountManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,7 +60,8 @@ public class AccountControllerTest {
     @Test
     public void req_getAccountWithAnExistingId_shouldFindAccount() throws Exception {
         //When get account with request
-        this.mvc.perform(MockMvcRequestBuilders.get("/account/"+ID))
+        this.mvc.perform(MockMvcRequestBuilders.get("/account")
+                        .param("id","1"))
                 .andExpect(status().isOk());
         //Then return the account associated
         Account accountRead = accountRepository.findById(ID).get();
@@ -70,9 +71,11 @@ public class AccountControllerTest {
     @Test
     public void req_doWithdraw_shouldAddOperationAndModifiedBalance() throws Exception {
         //When withdrawal 100 on an account with request
+
+        OperationForm operationForm = new OperationForm(account, 100.);
+
         this.mvc.perform(MockMvcRequestBuilders.post("/account/operation/withdraw")
-                .content(objectMapper.writeValueAsString(account))
-                .param("amount","100.")
+                .content(objectMapper.writeValueAsString(operationForm))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -86,9 +89,10 @@ public class AccountControllerTest {
     @Test
     public void req_doDeposit_shouldAddOperationAndModifiedBalance() throws Exception {
         //When deposit 300 on an account with request
+        OperationForm operationForm = new OperationForm(account, 300.);
+
         this.mvc.perform(MockMvcRequestBuilders.post("/account/operation/deposit")
-                        .content(objectMapper.writeValueAsString(account))
-                        .param("amount","300.")
+                        .content(objectMapper.writeValueAsString(operationForm))
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

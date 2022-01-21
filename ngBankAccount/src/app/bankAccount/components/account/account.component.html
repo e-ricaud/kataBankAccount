@@ -7,6 +7,7 @@
           <th scope="col">FirstName</th>
           <th scope="col">LastName</th>
           <th scope="col">Balance</th>
+          <th scope="col">History</th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +16,8 @@
           <td>{{ account.lastName }}</td>
           <td>{{ account.firstName }}</td>
           <td>{{ account.balance }}</td>
+          <td><mat-icon (click)="onHistoryAccount(account)">history</mat-icon></td>
+          <!-- [routerLink]="['history', account.id]" -->
         </tr>
       </tbody>
     </table>

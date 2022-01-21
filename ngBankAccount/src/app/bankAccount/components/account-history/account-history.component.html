@@ -1,0 +1,22 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Operation date</th>
+          <th scope="col">Operation type</th>
+          <th scope="col">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let operation of account?.operations">
+          <td>{{ operation.idOp }}</td>
+          <td>{{ operation.dateOperation }}</td>
+          <td>{{ operation.operationType }}</td>
+          <td>{{ operation.operationAmount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

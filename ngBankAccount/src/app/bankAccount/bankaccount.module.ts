@@ -6,12 +6,14 @@ import { AccountComponent } from './components/account/account.component';
 import { OperationDialogComponent } from './components/operation-dialog/operation-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularMaterialModule } from '../angular-material.module';
+import { AccountHistoryComponent } from './components/account-history/account-history.component';
 
 
 @NgModule({
   declarations: [
     AccountComponent,
-    OperationDialogComponent
+    OperationDialogComponent,
+    AccountHistoryComponent
   ],
   imports: [
     CommonModule,
