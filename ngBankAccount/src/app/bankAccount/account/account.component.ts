@@ -22,4 +22,8 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  onOperation(): void {
+    console.log('on opération');
+  }
+
 }
