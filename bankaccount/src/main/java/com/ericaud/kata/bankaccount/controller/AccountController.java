@@ -1,5 +1,7 @@
 package com.ericaud.kata.bankaccount.controller;
 
+import com.ericaud.kata.bankaccount.controller.model.JSONResponse;
+import com.ericaud.kata.bankaccount.controller.model.OperationForm;
 import com.ericaud.kata.bankaccount.entity.Account;
 import com.ericaud.kata.bankaccount.exception.InvalidOperationException;
 import com.ericaud.kata.bankaccount.persistance.AccountRepository;
@@ -40,24 +42,22 @@ public class AccountController {
     }
 
     @PostMapping(value = "/operation/withdraw", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void doWithdraw(
-            @RequestBody Account account,
-            @RequestParam("amount") Double amount
-    ) {
-        if (amount == 0 || amount < 0 ) {
+    @ResponseBody
+    public JSONResponse doWithdraw(@RequestBody OperationForm operationForm) {
+        if (operationForm.getAmount() == 0 || operationForm.getAmount() < 0 ) {
             throw new InvalidOperationException();
         }
-       this.accountManager.doWithdraw(amount, account);
+        this.accountManager.doWithdraw(operationForm.getAmount(), operationForm.getAccount());
+        return new JSONResponse("ok");
     }
 
     @PostMapping(value = "/operation/deposit", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void doDeposit(
-            @RequestBody Account account,
-            @RequestParam("amount") Double amount
-    ) {
-        if (amount == 0 || amount < 0 ) {
+    @ResponseBody
+    public JSONResponse doDeposit(@RequestBody OperationForm operationForm) {
+        if (operationForm.getAmount() == 0 || operationForm.getAmount() < 0 ) {
             throw new InvalidOperationException();
         }
-        this.accountManager.doDeposit(amount, account);
+        this.accountManager.doDeposit(operationForm.getAmount(), operationForm.getAccount());
+        return new JSONResponse("ok");
     }
 }

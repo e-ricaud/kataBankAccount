@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { Subscription } from 'rxjs';
 import { OperationType } from '../../model/operationType';
+import { AccountService } from '../../services/account.service';
+
 
 @Component({
   selector: 'app-operation-dialog',
@@ -22,7 +24,7 @@ export class OperationDialogComponent implements OnInit, OnDestroy {
 
   constructor(
     private dialogRef: MatDialogRef<OperationDialogComponent>,
-    private formBuilder: FormBuilder
+    private accountService: AccountService
   ) { }
 
   ngOnInit(): void {
@@ -34,13 +36,19 @@ export class OperationDialogComponent implements OnInit, OnDestroy {
 
   onSaveOperation():void {
     if(!this.operationForm.invalid) {
-      const form = this.operationForm.value;
-      form.operationType;
-      form.amount;
+      // const form = this.operationForm.value;
+      // form.operationType;
+      // form.amount;
+
+      // if(form.operationType === OperationType.DEPOSIT) {
+      //   this.accountService.doDeposit(acc)
+      // }
+
       // this.subscriptions.add(
         //Service de lancement d'opération
       // )
-      this.dialogRef.close();
+      console.log('value : ' + this.operationForm.value);
+      this.dialogRef.close(this.operationForm.value);
     }
 
   }

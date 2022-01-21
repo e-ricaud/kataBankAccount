@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 public final class Operation {
 
     @Id
+    @Column(name="idOp")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer idOp;
     @Column
     private final OperationType operationType;
     @Column
@@ -56,7 +57,7 @@ public final class Operation {
     @Override
     public String toString() {
         return "Operation{" +
-                "id=" + id +
+                "id=" + idOp +
                 ", operationType=" + operationType +
                 ", operationAmount=" + operationAmount +
                 ", dateOperation=" + dateOperation +

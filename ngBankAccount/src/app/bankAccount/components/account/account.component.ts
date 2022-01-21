@@ -4,6 +4,8 @@ import { AccountService } from '../../services/account.service';
 import { MatDialog } from '@angular/material/dialog'
 import { OperationDialogComponent } from '../operation-dialog/operation-dialog.component';
 import { Subscription } from 'rxjs';
+import { OperationType } from '../../model/operationType';
+import { OperationForm } from 'src/app/shared/model/operation-form';
 
 @Component({
   selector: 'app-account',
@@ -18,26 +20,55 @@ export class AccountComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private userService: AccountService) {
+    private accountService: AccountService) {
   }
 
   ngOnInit() {
-    this.userService.findById(1).subscribe(data => {
-      console.log('data serv ' + data.firstName);
-      this.accounts = [data];
-      console.log('size' + this.accounts.length)
-    });
+    this.findAccountById(1)
+  }
+
+  findAccountById(id:number) {
+    this.subscriptions.add(
+      this.accountService.findById(id).subscribe(data => {
+        this.accounts = [data];
+      })
+    )
   }
 
   onOperation(): void {
     console.log('on opération');
     const dialogRef = this.dialog.open(OperationDialogComponent, {width: '600px', disableClose: true})
 
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if(dialogResult) {
-        // Refresh Account
+    // this.subscriptions.add(
+
+    // )
+    dialogRef.afterClosed().subscribe(form => {
+      console.log('operationType : ' + form.operationType )
+      let accountOp = this.accounts[0];
+      accountOp.operations = [];
+      const operationForm : OperationForm = {
+        account: accountOp,
+        amount: form.amount
       }
-    })
+      if(form.operationType === OperationType.DEPOSIT) {
+        this.accountService.doDeposit(operationForm).subscribe(
+          response  => {
+            if(response.code === 'ok') {
+              this.findAccountById(1);
+            }
+          }
+        )
+      } else if (form.operationType === OperationType.WITHDRAWAL) {
+
+        this.accountService.doWithdraw(operationForm).subscribe(
+          response  => {
+            if(response.code === 'ok') {
+              this.findAccountById(1);
+            }
+          }
+        )
+      }
+    });
   }
 
 }
