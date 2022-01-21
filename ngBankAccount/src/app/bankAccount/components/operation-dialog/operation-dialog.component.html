@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Exécuter une opération</h1>
+
+<form [formGroup]="operationForm" (ngSubmit)="onSaveOperation()" class="form-horizontal">
+
+  <!-- Operation Type -->
+  <div class="row">
+    <div class="col-sm-4">
+      <b>Type de l'operation</b>
+    </div>
+    <div class="col-sm-8">
+      <mat-radio-group formControlName="operationType">
+        <mat-radio-button *ngFor="let operationtype of operationTypes" [value]="operationtype" style="display: block;">
+          {{operationtype}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <!-- Amount -->
+  <div class="row">
+    <div class="col-sm-4">
+      <b>Montant de l'opération</b>
+    </div>
+    <div class="col-sm-8">
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Montant" type="number" formControlName="amount" autocomplete="off">
+        <mat-error *ngIf="operationForm.controls['amount'].errors?.['required']">
+          Le montant de l'opération est obligatoire
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close class="btn btn-danger">Annuler</button>
+    <button mat-raised-button type="submit" class="btn btn-primary">Exécuter</button>
+  </div>
+
+</form>

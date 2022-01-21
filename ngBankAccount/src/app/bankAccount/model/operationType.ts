@@ -1,4 +1,4 @@
 export enum OperationType {
-  DEPOSIT,
-  WITHDRAWAL
+  DEPOSIT='Dépot d\'argent',
+  WITHDRAWAL='Retrait d\'argent'
 }

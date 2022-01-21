@@ -1,0 +1,16 @@
+.mat-dialog-content {
+  & > .row {
+    margin-bottom: 20px;
+
+    & > .col-sm-4 {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    & > .col-sm-8 {
+      .mat-form-field {
+        width: 300px;
+      }
+    }
+  }
+}
