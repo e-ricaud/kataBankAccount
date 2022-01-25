@@ -61,7 +61,7 @@ public class AccountControllerTest {
     public void req_getAccountWithAnExistingId_shouldFindAccount() throws Exception {
         //When get account with request
         this.mvc.perform(MockMvcRequestBuilders.get("/account")
-                        .param("id","1"))
+                        .param("id","2"))
                 .andExpect(status().isOk());
         //Then return the account associated
         Account accountRead = accountRepository.findById(ID).get();
